@@ -2,18 +2,18 @@
 FROM alpine:3.7 
 MAINTAINER Francisco Miguel Cejudo <fmcejudo@gmail.com>
 
-ENV DOCKER_VERSION=1.11.1 \
-    DOCKER_COMPOSE_VERSION=1.7.1 
+ENV DOCKER_VERSION=1.12.1 \
+    DOCKER_COMPOSE_VERSION=1.8.1
 
 
 # Install Docker, Docker Compose
 RUN apk --update --no-cache \
-        add curl device-mapper mkinitfs zsh e2fsprogs e2fsprogs-extra iptables && \
+        add curl device-mapper mkinitfs zsh e2fsprogs e2fsprogs-extra iptables ca-certificates && \
         curl https://get.docker.com/builds/Linux/x86_64/docker-${DOCKER_VERSION}.tgz | tar zx && \
         mv /docker/* /bin/ && chmod +x /bin/docker* \
     && \
         apk add py-pip && \
-        pip install docker-compose==${DOCKER_COMPOSE_VERSION} 
+        pip install docker-compose==${DOCKER_COMPOSE_VERSION}
 #install aws-cli
 RUN apk -Uuv add groff less python py-pip && \
     pip install awscli 
